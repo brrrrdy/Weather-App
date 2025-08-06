@@ -9,7 +9,7 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 - Look of the page should change depending on the weather.
 - Uses async/await.
 
-### Webpack-Template
+## Webpack-Template
 
 Template for future projects using webpack created by me.
 
