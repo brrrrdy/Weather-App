@@ -1,0 +1,19 @@
+.
+├── README.md
+├── dist
+│   ├── index.html
+│   └── main.js
+├── package-lock.json
+├── package.json
+├── project-structure.text
+├── project-structure.txt
+├── src
+│   ├── assets
+│   │   └── images
+│   ├── index.html
+│   ├── index.js
+│   ├── styles.css
+│   └── ui.js
+└── webpack.config.js
+
+4 directories, 12 files
