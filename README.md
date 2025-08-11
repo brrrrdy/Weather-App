@@ -9,6 +9,13 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 - Look of the page should change depending on the weather.
 - Uses async/await.
 
+## Steps
+
+- Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
+- Set up a form that will let users input their location and will fetch the weather info (still just console.log() it).
+
+⋅⋅⋅⋅\* While you don’t have to, if you wish to display weather icons then there can be a lot of them to import, so have a look at the dynamic import() function. Unlike plain template strings without an import, Webpack can read dynamic imports and still bundle all the relevant assets.
+
 ## Webpack-Template
 
 Template for future projects using webpack created by me.
