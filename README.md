@@ -17,6 +17,12 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 - Add any styling you like!
 - Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API. Use DevTools to simulate network speeds.
 
+## UI Mockups
+
+### Mobile
+
+![Alt text](src/resources/images/mob-ui.png)
+
 ## Webpack-Template
 
 Template for future projects using webpack created by me.
