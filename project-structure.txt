@@ -5,15 +5,16 @@
 │   └── main.js
 ├── package-lock.json
 ├── package.json
-├── project-structure.text
 ├── project-structure.txt
 ├── src
-│   ├── assets
-│   │   └── images
 │   ├── index.html
 │   ├── index.js
-│   ├── styles.css
-│   └── ui.js
+│   ├── modules
+│   │   └── ui.js
+│   ├── resources
+│   │   └── images
+│   │       └── mob-ui.png
+│   └── styles.css
 └── webpack.config.js
 
-4 directories, 12 files
+5 directories, 12 files

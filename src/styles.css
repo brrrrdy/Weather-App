@@ -1,0 +1,49 @@
+:root {
+  --primary: #339989;
+  --secondary: #7de2d1;
+  --accent: #efa148;
+  --light: #fffafb;
+  --dark: #131515;
+  --gray: #2b2c28;
+  --white: #ffffff;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--primary);
+}
+
+.page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.app-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  width: 200px;
+}
