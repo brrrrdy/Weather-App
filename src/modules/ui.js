@@ -32,9 +32,9 @@ export function createInitialUI() {
 
 //  UI Tree page container
 
-//       -  home header
-//             - search location
-//             - logo
+//       -  home header ✅
+//             - search location ✅
+//             - logo ✅
 //         - main content
 //             - current weather image
 //             - temp
