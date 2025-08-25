@@ -4,11 +4,11 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 
 ## Requirements
 
-- Search for and display weather for a specific location.
-- Toggle information between farenheit and celcius.
-- Look of the page should change depending on the weather.
-- Uses async/await.
-- Mobile first design.
+- Search for and display weather for a specific location. ✅
+- Toggle information between farenheit and celcius. ✅
+- Look of the page should change depending on the weather. ⛔️
+- Uses async/await. ✅
+- Mobile first design. ✅
 
 ## Steps
 
