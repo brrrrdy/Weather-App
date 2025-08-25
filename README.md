@@ -10,6 +10,10 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 - Uses async/await. ✅
 - Mobile first design. ✅
 
+## Enhancements
+
+- Search bar displays options for cities based on user input. e.g. typing the first 3 characters of the city such as 'New' would display all available cities starting with 'New'.
+
 ## Steps
 
 - Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
