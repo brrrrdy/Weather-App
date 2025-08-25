@@ -13,33 +13,41 @@ export function renderApp(rootEl) {
     const city = e.target.value.trim();
     if (!city) return;
 
-    await handleSearch(city, ui.results);
+    // determine unit for search
+
+    const currentUnit = unitSwitcherInstance
+      ? unitSwitcherInstance.getCurrentUnit()
+      : "metric";
+
+    await handleSearch(city, ui.results, currentUnit);
 
     // add unit switcher after first search
 
     if (!unitSwitcherInstance) {
-      unitSwitcherInstance = createUnitSwitcher(ui.main, city, async (c, u) => {
+      unitSwitcherInstance = createUnitSwitcher(ui.main, async (c, u) => {
         await handleSearch(c, ui.results, u);
       });
-    } else {
-      unitSwitcherInstance.setCurrentCity(city);
     }
+
+    // set current city and sync button states
+
+    unitSwitcherInstance.setCurrentCity(city, currentUnit);
   });
 }
 
 // handle search and render weather
 
 async function handleSearch(city, mountPoint, unit) {
-  const currentUnit = unit || "metric";
   setLoading(mountPoint, `Loading ${city}...`);
-
   try {
-    const data = await fetchWeather(city, currentUnit);
-    renderWeather(mountPoint, data, currentUnit);
+    const data = await fetchWeather(city, unit);
+    renderWeather(mountPoint, data, unit);
   } catch (err) {
     renderError(mountPoint, err);
   }
 }
+
+// helpers
 
 function renderWeather(container, data, currentUnit) {
   clearChildren(container);
@@ -107,7 +115,6 @@ function renderWeather(container, data, currentUnit) {
 
 function createMetric(labelText, valueText) {
   const li = document.createElement("li");
-
   const label = document.createElement("span");
   label.className = "label";
   label.textContent = labelText;

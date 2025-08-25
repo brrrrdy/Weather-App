@@ -1,9 +1,11 @@
-// Create initial UI with search bar
+// create initial UI with search bar
+
 export function createInitialUI() {
   const pageContainer = document.createElement("div");
   pageContainer.className = "page-container";
 
-  // Header
+  // header
+
   const header = document.createElement("header");
   header.className = "app-header";
 
@@ -11,7 +13,8 @@ export function createInitialUI() {
   logo.className = "app-logo";
   logo.textContent = "The Weather";
 
-  // Search container
+  // search container
+
   const searchContainer = document.createElement("div");
   searchContainer.className = "search-container";
 
@@ -24,7 +27,8 @@ export function createInitialUI() {
   header.appendChild(logo);
   header.appendChild(searchContainer);
 
-  // Main content
+  // main content
+
   const main = document.createElement("main");
   main.className = "app-main";
 
@@ -47,26 +51,4 @@ export function createInitialUI() {
     results,
     main,
   };
-}
-
-// Factory function to create the unit switcher dynamically
-
-export function createUnitSwitcher() {
-  const switcher = document.createElement("div");
-  switcher.className = "unit-switcher";
-
-  const cBtn = document.createElement("button");
-  cBtn.className = "unit-btn active";
-  cBtn.textContent = "°C";
-  cBtn.dataset.unit = "metric";
-
-  const fBtn = document.createElement("button");
-  fBtn.className = "unit-btn";
-  fBtn.textContent = "°F";
-  fBtn.dataset.unit = "us";
-
-  switcher.appendChild(cBtn);
-  switcher.appendChild(fBtn);
-
-  return { switcher, cBtn, fBtn };
 }

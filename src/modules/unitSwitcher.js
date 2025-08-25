@@ -1,50 +1,45 @@
-import { fetchWeather } from "./api";
+export function createUnitSwitcher(container, updateWeatherCallback) {
+  let currentUnit = "metric";
+  let currentCity = null;
 
-// track currently displayed unit
-
-let currentUnit = "metric";
-export function createUnitSwitcher(container, city, updateWeatherCallback) {
   const switcher = document.createElement("div");
   switcher.className = "unit-switcher";
 
   const cBtn = document.createElement("button");
   cBtn.className = "unit-btn active";
   cBtn.textContent = "°C";
-  cBtn.dataset.unit = "metric";
 
   const fBtn = document.createElement("button");
   fBtn.className = "unit-btn";
   fBtn.textContent = "°F";
-  fBtn.dataset.unit = "us";
 
   switcher.appendChild(cBtn);
   switcher.appendChild(fBtn);
-
-  // wire events
-
-  cBtn.addEventListener("click", async () => {
-    if (currentUnit === "metric") return;
-    currentUnit = "metric";
-    cBtn.classList.add("active");
-    fBtn.classList.remove("active");
-    if (city) updateWeatherCallback(city, currentUnit);
-  });
-
-  fBtn.addEventListener("click", async () => {
-    if (currentUnit === "us") return;
-    currentUnit = "us";
-    fBtn.classList.add("active");
-    cBtn.classList.remove("active");
-    if (city) updateWeatherCallback(city, currentUnit);
-  });
-
   container.appendChild(switcher);
 
+  const switchUnit = async (unit) => {
+    if (currentUnit === unit) return;
+    currentUnit = unit;
+    cBtn.classList.toggle("active", unit === "metric");
+    fBtn.classList.toggle("active", unit === "us");
+    if (currentCity) {
+      await updateWeatherCallback(currentCity, currentUnit);
+    }
+  };
+
+  cBtn.addEventListener("click", () => switchUnit("metric"));
+  fBtn.addEventListener("click", () => switchUnit("us"));
+
   return {
-    switcher,
-    cBtn,
-    fBtn,
+    setCurrentCity: (city, defaultUnit = "metric") => {
+      currentCity = city;
+
+      // reset unit and button states to defaultUnit
+
+      currentUnit = defaultUnit;
+      cBtn.classList.toggle("active", defaultUnit === "metric");
+      fBtn.classList.toggle("active", defaultUnit === "us");
+    },
     getCurrentUnit: () => currentUnit,
-    setCurrentCity: (newCity) => (city = newCity),
   };
 }
