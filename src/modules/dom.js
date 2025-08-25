@@ -6,7 +6,7 @@ export function renderApp(rootEl) {
   const ui = createInitialUI();
   rootEl.appendChild(ui.pageContainer);
 
-  // Wire search events
+  // wire search events
   ui.searchInput.addEventListener("keydown", async (e) => {
     if (e.key !== "Enter") return;
     const query = e.target.value.trim();
@@ -15,7 +15,8 @@ export function renderApp(rootEl) {
   });
 }
 
-// --- helpers ---
+// helpers
+
 async function handleSearch(city, mountPoint) {
   setLoading(mountPoint, `Loading ${city}...`);
   try {
@@ -74,10 +75,12 @@ function renderWeather(container, data) {
   const description = current.conditions || current.icon || "—";
 
   // card
+
   const card = document.createElement("article");
   card.className = "weather-card";
 
   // header
+
   const header = document.createElement("header");
   header.className = "weather-header";
 
@@ -93,6 +96,7 @@ function renderWeather(container, data) {
   header.appendChild(desc);
 
   // grid
+
   const grid = document.createElement("div");
   grid.className = "weather-grid";
 
@@ -125,6 +129,7 @@ function renderWeather(container, data) {
   grid.appendChild(metrics);
 
   // assemble
+
   card.appendChild(header);
   card.appendChild(grid);
   container.appendChild(card);
