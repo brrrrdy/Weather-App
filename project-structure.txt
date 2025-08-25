@@ -10,6 +10,8 @@
 │   ├── index.html
 │   ├── index.js
 │   ├── modules
+│   │   ├── api.js
+│   │   ├── dom.js
 │   │   └── ui.js
 │   ├── resources
 │   │   └── images
@@ -17,4 +19,4 @@
 │   └── styles.css
 └── webpack.config.js
 
-5 directories, 12 files
+5 directories, 14 files

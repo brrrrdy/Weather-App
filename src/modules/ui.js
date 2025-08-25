@@ -3,16 +3,18 @@ export function createInitialUI() {
   const pageContainer = document.createElement("div");
   pageContainer.className = "page-container";
 
-  // header div
+  // header
   const header = document.createElement("header");
   header.className = "app-header";
 
-  // logo div
+  // logo
+
   const logo = document.createElement("div");
   logo.className = "app-logo";
   logo.textContent = "The Weather";
 
-  // search bar div
+  // search
+
   const searchContainer = document.createElement("div");
   searchContainer.className = "search-container";
 
@@ -21,13 +23,31 @@ export function createInitialUI() {
   searchInput.type = "text";
   searchInput.placeholder = "Search for a city...";
 
-  // Add elements to DOM
   searchContainer.appendChild(searchInput);
   header.appendChild(logo);
   header.appendChild(searchContainer);
-  pageContainer.appendChild(header);
 
-  return pageContainer;
+  // main content container
+  const main = document.createElement("main");
+  main.className = "app-main";
+
+  // results container
+  const results = document.createElement("div");
+  results.className = "results";
+
+  // default placeholder
+  const placeholder = document.createElement("p");
+  placeholder.className = "muted";
+  results.appendChild(placeholder);
+
+  main.appendChild(results);
+
+  // assemble page
+  pageContainer.appendChild(header);
+  pageContainer.appendChild(main);
+
+  // return references needed by dom.js
+  return { pageContainer, searchInput, results };
 }
 
 //  UI Tree page container
