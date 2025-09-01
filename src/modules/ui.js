@@ -1,11 +1,8 @@
-// create initial UI with search bar
-
 export function createInitialUI() {
   const pageContainer = document.createElement("div");
   pageContainer.className = "page-container";
 
   // header
-
   const header = document.createElement("header");
   header.className = "app-header";
 
@@ -14,7 +11,6 @@ export function createInitialUI() {
   logo.textContent = "The Weather";
 
   // search container
-
   const searchContainer = document.createElement("div");
   searchContainer.className = "search-container";
 
@@ -28,7 +24,6 @@ export function createInitialUI() {
   header.appendChild(searchContainer);
 
   // main content
-
   const main = document.createElement("main");
   main.className = "app-main";
 
@@ -37,7 +32,6 @@ export function createInitialUI() {
 
   const placeholder = document.createElement("p");
   placeholder.className = "muted";
-
   results.appendChild(placeholder);
 
   main.appendChild(results);
@@ -51,6 +45,48 @@ export function createInitialUI() {
     results,
     main,
   };
+}
+
+// map weather icon or description to image filename
+
+function getWeatherIconFile(icon, description) {
+  if (icon) return require(`../resources/images/weather_icons/${icon}.svg`);
+  const desc = description.toLowerCase();
+  if (desc.includes("clear") && desc.includes("night"))
+    return require("../resources/images/weather_icons/clear-night.svg");
+  if (desc.includes("clear"))
+    return require("../resources/images/weather_icons/clear-day.svg");
+  if (desc.includes("partly") && desc.includes("night"))
+    return require("../resources/images/weather_icons/partly-cloudy-night.svg");
+  if (desc.includes("partly"))
+    return require("../resources/images/weather_icons/partly-cloudy-day.svg");
+  if (desc.includes("cloud"))
+    return require("../resources/images/weather_icons/cloudy.svg");
+  if (desc.includes("fog"))
+    return require("../resources/images/weather_icons/fog.svg");
+  if (desc.includes("rain") && desc.includes("thunder"))
+    return require("../resources/images/weather_icons/thunder-rain.svg");
+  if (desc.includes("rain"))
+    return require("../resources/images/weather_icons/rain.svg");
+  if (desc.includes("showers") && desc.includes("night"))
+    return require("../resources/images/weather_icons/showers-night.svg");
+  if (desc.includes("showers") && desc.includes("day"))
+    return require("../resources/images/weather_icons/showers-day.svg");
+  if (desc.includes("showers"))
+    return require("../resources/images/weather_icons/rain.svg");
+  if (
+    desc.includes("snow") &&
+    desc.includes("showers") &&
+    desc.includes("night")
+  )
+    return require("../resources/images/weather_icons/snow-showers-night.svg");
+  if (desc.includes("snow") && desc.includes("showers") && desc.includes("day"))
+    return require("../resources/images/weather_icons/snow-showers-day.svg");
+  if (desc.includes("snow"))
+    return require("../resources/images/weather_icons/snow.svg");
+  if (desc.includes("wind"))
+    return require("../resources/images/weather_icons/wind.svg");
+  return require("../resources/images/weather_icons/clear-day.svg"); // fallback
 }
 
 export function createWeatherCard({
@@ -75,7 +111,11 @@ export function createWeatherCard({
   const imgEl = document.createElement("img");
   imgEl.className = "weather-img";
   imgEl.alt = description;
-  imgEl.src = `/src/resources/images/${icon || "default"}.png`;
+  imgEl.src = getWeatherIconFile(icon, description);
+
+  console.log("icon:", icon);
+  console.log("description:", description);
+  console.log("img src:", imgEl.src);
 
   // current weather description
   const descEl = document.createElement("div");

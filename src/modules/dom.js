@@ -69,7 +69,7 @@ function renderWeather(container, data, currentUnit) {
   const unitLabel = currentUnit === "metric" ? "°C" : "°F";
   const icon = current.icon || "default";
 
-  // Use the UI builder function
+  // UI builder function
   const card = createWeatherCard({
     loc,
     description,
