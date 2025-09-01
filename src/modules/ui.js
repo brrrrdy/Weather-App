@@ -52,3 +52,98 @@ export function createInitialUI() {
     main,
   };
 }
+
+export function createWeatherCard({
+  loc,
+  description,
+  temp,
+  unitLabel,
+  feels,
+  humidity,
+  precipProb,
+  icon,
+}) {
+  const card = document.createElement("article");
+  card.className = "weather-card weather-grid-5";
+
+  // city name
+  const cityEl = document.createElement("div");
+  cityEl.className = "city";
+  cityEl.textContent = loc;
+
+  // weather icon
+  const imgEl = document.createElement("img");
+  imgEl.className = "weather-img";
+  imgEl.alt = description;
+  imgEl.src = `/src/resources/images/${icon || "default"}.png`;
+
+  // current weather description
+  const descEl = document.createElement("div");
+  descEl.className = "description";
+  descEl.textContent = description;
+
+  // current temperature
+  const tempEl = document.createElement("div");
+  tempEl.className = "current-temp";
+  const tempValue = document.createElement("span");
+  tempValue.className = "value";
+  tempValue.textContent = temp;
+  const tempUnit = document.createElement("span");
+  tempUnit.className = "unit";
+  tempUnit.textContent = unitLabel;
+  tempEl.appendChild(tempValue);
+  tempEl.appendChild(tempUnit);
+
+  // feels like, humidity, chance of rain
+  const metricsRow = document.createElement("div");
+  metricsRow.className = "metrics-row";
+
+  // feels like
+  const feelsDiv = document.createElement("div");
+  feelsDiv.className = "metric";
+  const feelsLabel = document.createElement("span");
+  feelsLabel.className = "label";
+  feelsLabel.textContent = "Feels like";
+  const feelsValue = document.createElement("span");
+  feelsValue.className = "value";
+  feelsValue.textContent = `${feels}${unitLabel}`;
+  feelsDiv.appendChild(feelsLabel);
+  feelsDiv.appendChild(feelsValue);
+
+  // humidity
+  const humidityDiv = document.createElement("div");
+  humidityDiv.className = "metric";
+  const humidityLabel = document.createElement("span");
+  humidityLabel.className = "label";
+  humidityLabel.textContent = "Humidity";
+  const humidityValue = document.createElement("span");
+  humidityValue.className = "value";
+  humidityValue.textContent = `${humidity}%`;
+  humidityDiv.appendChild(humidityLabel);
+  humidityDiv.appendChild(humidityValue);
+
+  // chance of rain
+  const rainDiv = document.createElement("div");
+  rainDiv.className = "metric";
+  const rainLabel = document.createElement("span");
+  rainLabel.className = "label";
+  rainLabel.textContent = "Chance of rain";
+  const rainValue = document.createElement("span");
+  rainValue.className = "value";
+  rainValue.textContent = precipProb;
+  rainDiv.appendChild(rainLabel);
+  rainDiv.appendChild(rainValue);
+
+  metricsRow.appendChild(feelsDiv);
+  metricsRow.appendChild(humidityDiv);
+  metricsRow.appendChild(rainDiv);
+
+  // assembly
+  card.appendChild(cityEl);
+  card.appendChild(imgEl);
+  card.appendChild(descEl);
+  card.appendChild(tempEl);
+  card.appendChild(metricsRow);
+
+  return card;
+}
