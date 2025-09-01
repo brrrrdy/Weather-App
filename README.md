@@ -22,7 +22,9 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 - Add any styling you like!
 - Optional: add a ‘loading’ component that displays from the time the form is submitted until the information comes back from the API. Use DevTools to simulate network speeds.
 
-### Notes
+### Bugs
+
+- API not loading chance of rain correctly. FIXED ✅
 
 ## UI Mockups
 

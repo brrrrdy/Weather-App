@@ -14,7 +14,6 @@ export function renderApp(rootEl) {
     if (!city) return;
 
     // determine unit for search
-
     const currentUnit = unitSwitcherInstance
       ? unitSwitcherInstance.getCurrentUnit()
       : "metric";
@@ -22,7 +21,6 @@ export function renderApp(rootEl) {
     await handleSearch(city, ui.results, currentUnit);
 
     // add unit switcher after first search
-
     if (!unitSwitcherInstance) {
       unitSwitcherInstance = createUnitSwitcher(ui.main, async (c, u) => {
         await handleSearch(c, ui.results, u);
@@ -30,13 +28,11 @@ export function renderApp(rootEl) {
     }
 
     // set current city and sync button states
-
     unitSwitcherInstance.setCurrentCity(city, currentUnit);
   });
 }
 
 // handle search and render weather
-
 async function handleSearch(city, mountPoint, unit) {
   setLoading(mountPoint, `Loading ${city}...`);
   try {
@@ -48,19 +44,28 @@ async function handleSearch(city, mountPoint, unit) {
 }
 
 // helpers
-
 function renderWeather(container, data, currentUnit) {
   clearChildren(container);
 
   const loc = data?.resolvedAddress || data?.address || "Unknown location";
-  const current = data?.currentConditions || data?.days?.[0] || {};
+  const current = data?.currentConditions || {};
+  const todayForecast = data?.days?.[0] || {};
+
   const temp = current.temp != null ? Math.round(current.temp) : "—";
   const feels = current.feelslike != null ? Math.round(current.feelslike) : "—";
   const humidity =
     current.humidity != null ? Math.round(current.humidity) : "—";
-  const precipProb =
-    current.precipprob != null ? Math.round(current.precipprob) : "—";
-  const description = current.conditions || current.icon || "—";
+
+  // Use today's forecast precipitation probab
+
+  let precipProb = "—";
+  if (todayForecast.precipprob != null) {
+    precipProb = `${Math.round(todayForecast.precipprob)}%`;
+  } else if (todayForecast.pop != null) {
+    precipProb = `${Math.round(todayForecast.pop)}%`;
+  }
+
+  const description = current.conditions || todayForecast.conditions || "—";
   const unitLabel = currentUnit === "metric" ? "°C" : "°F";
 
   const card = document.createElement("article");
@@ -100,9 +105,9 @@ function renderWeather(container, data, currentUnit) {
   const metrics = document.createElement("ul");
   metrics.className = "metrics";
 
-  metrics.appendChild(createMetric("Feels like", `${feels}${unitLabel}`));
-  metrics.appendChild(createMetric("Humidity", `${humidity}%`));
-  metrics.appendChild(createMetric("Chance of rain", `${precipProb}%`));
+  metrics.appendChild(createMetric("Feels like:", `${feels}${unitLabel}`));
+  metrics.appendChild(createMetric("Humidity: ", `${humidity}%`));
+  metrics.appendChild(createMetric("Chance of rain today: ", precipProb));
 
   grid.appendChild(bigTemp);
   grid.appendChild(metrics);
