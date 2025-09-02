@@ -38,8 +38,34 @@ async function handleSearch(city, mountPoint, unit) {
   try {
     const data = await fetchWeather(city, unit);
     renderWeather(mountPoint, data, unit);
+    updateBackgroundBasedOnTime(data); // Add background transition
   } catch (err) {
     renderError(mountPoint, err);
+  }
+}
+
+// Add this function to update background based on time
+function updateBackgroundBasedOnTime(weatherData) {
+  const currentTime = new Date().getTime() / 1000; // Current time in seconds
+  const sunrise = weatherData?.currentConditions?.sunriseEpoch;
+  const sunset = weatherData?.currentConditions?.sunsetEpoch;
+
+  if (!sunrise || !sunset) {
+    // Default to day background if no sunrise/sunset data
+    setBackgroundTime("day");
+    return;
+  }
+
+  // Determine new time of day
+  const newTimeOfDay =
+    currentTime >= sunrise && currentTime < sunset ? "day" : "night";
+
+  // Simply toggle the night-background class
+  const body = document.body;
+  if (newTimeOfDay === "night") {
+    body.classList.add("night-background");
+  } else {
+    body.classList.remove("night-background");
   }
 }
 

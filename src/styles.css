@@ -16,7 +16,85 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: var(--primary);
+  background: var(--primary);
+  min-height: 100vh;
+  position: relative;
+}
+
+body > * {
+  position: relative;
+}
+
+/* Day background */
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url("/src/resources/images/day-gradient.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Night background */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: url("/src/resources/images/night-gradient.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* When night class is added, fade out day and fade in night */
+
+body.night-background::before {
+  opacity: 0;
+}
+
+body.night-background::after {
+  opacity: 1;
+}
+
+/* Update text colors for night background */
+
+body.night-background .app-logo,
+body.night-background .search-input,
+body.night-background .city,
+body.night-background .description,
+body.night-background .current-temp,
+body.night-background .metric .value,
+body.night-background .loading,
+body.night-background .error p {
+  color: var(--light) !important;
+}
+
+body.night-background .search-input {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.night-background .metric .label {
+  color: var(--secondary);
+}
+
+body.night-background .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .page-container {
@@ -36,13 +114,14 @@ body {
   font-size: 24px;
   font-weight: bold;
   color: var(--secondary);
+  transition: color 1.5s ease-in-out;
 }
 
 /* search styles */
-
 .search-container {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .search-input {
@@ -52,10 +131,10 @@ body {
   color: white;
   font-size: 16px;
   width: 200px;
+  transition: all 1.5s ease-in-out;
 }
 
 /* results styles */
-
 .results {
   display: flex;
   justify-content: center;
@@ -82,6 +161,7 @@ body {
   font-weight: bold;
   color: var(--accent);
   text-align: center;
+  transition: color 1.5s ease-in-out;
 }
 
 .weather-img {
@@ -96,6 +176,7 @@ body {
   font-size: 1.2rem;
   color: var(--gray);
   text-align: center;
+  transition: color 1.5s ease-in-out;
 }
 
 .current-temp {
@@ -107,6 +188,7 @@ body {
   justify-content: center;
   align-items: baseline;
   gap: 8px;
+  transition: color 1.5s ease-in-out;
 }
 
 .metrics-row {
@@ -120,6 +202,7 @@ body {
   display: block;
   font-size: 0.9rem;
   color: var(--gray);
+  transition: color 1.5s ease-in-out;
 }
 
 .metric .value {
@@ -127,10 +210,10 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   color: var(--dark);
+  transition: color 1.5s ease-in-out;
 }
 
 /* unit switcher styles */
-
 .unit-switcher {
   display: flex;
   justify-content: center;
@@ -145,4 +228,49 @@ body {
   cursor: pointer;
   font-size: 1rem;
   border-radius: 4px;
+  transition: all 1.5s ease-in-out;
+}
+
+/* update unit switcher for night background */
+
+body.night-background .unit-switcher button {
+  background-color: rgba(125, 226, 209, 0.2);
+  color: var(--light);
+}
+
+body.night-background .unit-switcher button.active {
+  background-color: var(--secondary);
+  color: var(--dark);
+}
+
+/* loading and error states */
+.loading {
+  color: var(--dark);
+  text-align: center;
+  font-size: 1.2rem;
+  transition: color 1.5s ease-in-out;
+}
+
+body.night-background .loading {
+  color: var(--light);
+}
+
+.error p {
+  color: var(--dark);
+  text-align: center;
+  transition: color 1.5s ease-in-out;
+}
+
+body.night-background .error p {
+  color: var(--light);
+}
+
+.muted {
+  color: var(--gray);
+  font-size: 0.9rem;
+  transition: color 1.5s ease-in-out;
+}
+
+body.night-background .muted {
+  color: var(--secondary);
 }
