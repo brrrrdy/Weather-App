@@ -86,7 +86,7 @@ body.night-background .error p {
 }
 
 body.night-background .search-input {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent;
 }
 
 body.night-background .metric .label {
@@ -113,7 +113,7 @@ body.night-background .search-input::placeholder {
 .app-logo {
   font-size: 24px;
   font-weight: bold;
-  color: var(--secondary);
+  color: var(--dark);
   transition: color 1.5s ease-in-out;
 }
 
@@ -128,7 +128,7 @@ body.night-background .search-input::placeholder {
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: var(--dark);
   font-size: 16px;
   width: 200px;
   transition: all 1.5s ease-in-out;
@@ -159,7 +159,7 @@ body.night-background .search-input::placeholder {
 .weather-card .city {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--accent);
+  color: var(--dark);
   text-align: center;
   transition: color 1.5s ease-in-out;
 }
@@ -182,7 +182,7 @@ body.night-background .search-input::placeholder {
 .current-temp {
   font-size: 2.5rem;
   font-weight: bold;
-  color: var(--accent);
+  color: var(--dark);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -228,7 +228,7 @@ body.night-background .search-input::placeholder {
   cursor: pointer;
   font-size: 1rem;
   border-radius: 4px;
-  transition: all 1.5s ease-in-out;
+  /* transition: all 1.5s ease-in-out; */
 }
 
 /* update unit switcher for night background */
