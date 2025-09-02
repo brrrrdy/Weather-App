@@ -1,6 +1,7 @@
 /* * {
   border: 1px solid rgba(221, 38, 38, 0.74);
 } */
+@import url("https://fonts.googleapis.com/css2?family=Micro+5+Charted&display=swap");
 
 :root {
   --primary: #339989;
@@ -10,6 +11,7 @@
   --dark: #131515;
   --gray: #2b2c28;
   --white: #ffffff;
+  --font-logo: "Micro 5 Charted", sans-serif;
 }
 
 body {
@@ -74,7 +76,6 @@ body.night-background::after {
 
 /* Update text colors for night background */
 
-body.night-background .app-logo,
 body.night-background .search-input,
 body.night-background .city,
 body.night-background .description,
@@ -83,6 +84,10 @@ body.night-background .metric .value,
 body.night-background .loading,
 body.night-background .error p {
   color: var(--light) !important;
+}
+
+body.night-background .app-logo {
+  color: var(--accent) !important;
 }
 
 body.night-background .search-input {
@@ -111,10 +116,12 @@ body.night-background .search-input::placeholder {
 }
 
 .app-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--dark);
-  transition: color 1.5s ease-in-out;
+  font-family: var(--font-logo);
+  font-size: 52px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-style: italic;
+  color: indianred;
 }
 
 /* search styles */
@@ -159,6 +166,7 @@ body.night-background .search-input::placeholder {
 .weather-card .city {
   font-size: 2rem;
   font-weight: bold;
+  font-style: italic;
   color: var(--dark);
   text-align: center;
   transition: color 1.5s ease-in-out;
@@ -221,14 +229,14 @@ body.night-background .search-input::placeholder {
 }
 
 .unit-switcher button {
-  background-color: var(--secondary);
+  background-color: rgba(125, 226, 209, 0.2);
   border: none;
   color: var(--dark);
   padding: 8px 16px;
   cursor: pointer;
   font-size: 1rem;
   border-radius: 4px;
-  /* transition: all 1.5s ease-in-out; */
+  transition: all 0.5s ease-in-out;
 }
 
 /* update unit switcher for night background */

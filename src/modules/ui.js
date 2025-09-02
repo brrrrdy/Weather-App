@@ -8,7 +8,7 @@ export function createInitialUI() {
 
   const logo = document.createElement("div");
   logo.className = "app-logo";
-  logo.textContent = "The Weather";
+  logo.textContent = "the weather";
 
   // search container
   const searchContainer = document.createElement("div");
