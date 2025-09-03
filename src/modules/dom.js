@@ -6,39 +6,69 @@ export function renderApp(rootEl) {
   const ui = createInitialUI();
   rootEl.appendChild(ui.pageContainer);
 
-  let unitSwitcherInstance;
+  let unitSwitcherInstance = null;
+
+  // wrapper function that maintains state
+
+  const performSearchWrapper = async () => {
+    unitSwitcherInstance = await performSearch(ui, unitSwitcherInstance);
+  };
+
+  // event listeners
 
   ui.searchInput.addEventListener("keydown", async (e) => {
     if (e.key !== "Enter") return;
-    const city = e.target.value.trim();
-    if (!city) return;
-
-    // determine unit for search
-    const currentUnit = unitSwitcherInstance
-      ? unitSwitcherInstance.getCurrentUnit()
-      : "metric";
-
-    await handleSearch(city, ui.results, currentUnit);
-
-    // add unit switcher after first search
-    if (!unitSwitcherInstance) {
-      unitSwitcherInstance = createUnitSwitcher(ui.main, async (c, u) => {
-        await handleSearch(c, ui.results, u);
-      });
-    }
-
-    // set current city and sync button states
-    unitSwitcherInstance.setCurrentCity(city, currentUnit);
+    await performSearchWrapper();
   });
+
+  ui.searchButton.addEventListener("click", async () => {
+    await performSearchWrapper();
+  });
+
+  ui.searchInput.addEventListener("input", () => {
+    updateSearchButtonState(ui.searchInput, ui.searchButton);
+  });
+
+  updateSearchButtonState(ui.searchInput, ui.searchButton);
+}
+
+async function performSearch(ui, existingInstance) {
+  const city = ui.searchInput.value.trim();
+  if (!city) return existingInstance;
+
+  const currentUnit = existingInstance
+    ? existingInstance.getCurrentUnit()
+    : "metric";
+
+  await handleSearch(city, ui.results, currentUnit);
+
+  const existingSwitcher = ui.main.querySelector(".unit-switcher");
+  if (existingSwitcher) {
+    existingSwitcher.remove();
+  }
+
+  const newInstance = createUnitSwitcher(ui.main, async (c, u) => {
+    await handleSearch(c, ui.results, u);
+  });
+
+  newInstance.setCurrentCity(city, currentUnit);
+
+  return newInstance;
+}
+
+function updateSearchButtonState(searchInput, searchButton) {
+  const hasText = searchInput.value.trim().length > 0;
+  searchButton.disabled = !hasText;
 }
 
 // handle search and render weather
+
 async function handleSearch(city, mountPoint, unit) {
   setLoading(mountPoint, `Loading ${city}...`);
   try {
     const data = await fetchWeather(city, unit);
     renderWeather(mountPoint, data, unit);
-    updateBackgroundBasedOnTime(data); // Add background transition
+    updateBackgroundBasedOnTime(data);
   } catch (err) {
     renderError(mountPoint, err);
   }
@@ -46,23 +76,23 @@ async function handleSearch(city, mountPoint, unit) {
 
 // Add this function to update background based on time
 function updateBackgroundBasedOnTime(weatherData) {
-  const currentTime = new Date().getTime() / 1000; // Current time in seconds
+  const currentTime = new Date().getTime() / 1000;
   const sunrise = weatherData?.currentConditions?.sunriseEpoch;
   const sunset = weatherData?.currentConditions?.sunsetEpoch;
 
   if (!sunrise || !sunset) {
-    // Default to day background if no sunrise/sunset data
     setBackgroundTime("day");
     return;
   }
 
-  // Determine new time of day
   const newTimeOfDay =
     currentTime >= sunrise && currentTime < sunset ? "day" : "night";
+  setBackgroundTime(newTimeOfDay);
+}
 
-  // Simply toggle the night-background class
+function setBackgroundTime(timeOfDay) {
   const body = document.body;
-  if (newTimeOfDay === "night") {
+  if (timeOfDay === "night") {
     body.classList.add("night-background");
   } else {
     body.classList.remove("night-background");

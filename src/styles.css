@@ -13,6 +13,7 @@
   --header: #cd5c5c;
   --light: #fffafb;
   --searchlight: #bfe3f1;
+  --searchButtonHover: #10535c;
   --dark: #131515;
   --gray: #2b2c28;
   --font-logo: "Micro 5 Charted", sans-serif;
@@ -68,6 +69,14 @@ body::after {
   z-index: -1;
 }
 
+button,
+a,
+input[type="submit"],
+input[type="button"],
+.unit-switcher button {
+  cursor: pointer;
+}
+
 /* when night class is added, fade out day and fade in night */
 
 body.night-background::before {
@@ -119,6 +128,15 @@ body.night-background .search-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
+body.night-background .search-button {
+  filter: invert(77%) sepia(39%) saturate(1248%) hue-rotate(330deg)
+    brightness(105%) contrast(92%);
+}
+
+body.night-background .search-button:hover {
+  filter: invert(77%) sepia(39%) saturate(1248%) hue-rotate(330deg)
+    brightness(85%) contrast(92%);
+}
 /* page container */
 
 .page-container {
@@ -169,7 +187,37 @@ body.night-background .search-input::placeholder {
   width: 100%;
   max-width: 280px;
   transition: all 1.5s ease-in-out;
-  padding: 15px 15px;
+  padding: 15px 40px 15px 15px;
+}
+
+.search-button {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.6;
+  transition: all 0.3s ease-in-out;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  background-image: url("/src/resources/images/search-circle.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  pointer-events: auto;
+}
+
+.search-button:hover {
+  opacity: 0.8;
+  filter: brightness(0.7);
+}
+
+.search-button:active {
+  opacity: 1;
+  transform: translateY(-50%) scale(0.95);
 }
 
 /* about link */
@@ -182,10 +230,12 @@ body.night-background .search-input::placeholder {
   transition: all 0.3s ease-in-out;
   flex-shrink: 0;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .about-link:hover {
   color: var(--header);
+  cursor: pointer;
 }
 
 /* results  */

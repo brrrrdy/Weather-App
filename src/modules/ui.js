@@ -23,14 +23,22 @@ export function createInitialUI() {
   searchInput.type = "text";
   searchInput.placeholder = "Search for a city...";
 
+  const searchButton = document.createElement("button");
+  searchButton.className = "search-button";
+  searchButton.type = "button";
+  searchButton.setAttribute("aria-label", "Search for city");
+
   searchContainer.appendChild(searchInput);
+  searchContainer.appendChild(searchButton);
 
   // right nav
 
   const aboutLink = document.createElement("a");
   aboutLink.className = "about-link";
-  aboutLink.href = "#";
+  aboutLink.href = "https://github.com/brrrrdy/Weather-App";
   aboutLink.textContent = "about";
+  aboutLink.target = "_blank";
+  aboutLink.rel = "noopener";
 
   // add logo and search to header
 
@@ -58,6 +66,7 @@ export function createInitialUI() {
   return {
     pageContainer,
     searchInput,
+    searchButton,
     results,
     main,
     aboutLink,

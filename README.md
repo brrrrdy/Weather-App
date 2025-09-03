@@ -6,9 +6,9 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 
 - Search for and display weather for a specific location. ✅
 - Toggle information between farenheit and celcius. ✅
-- Look of the page should change depending on the weather. ⛔️
+- Look of the page should change depending on the weather. ✅
 - Uses async/await. ✅
-- Mobile first design. ✅
+- Mobile first design. ⛔️
 
 ## Enhancements
 
@@ -25,6 +25,7 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 ### Bugs
 
 - API not loading chance of rain correctly. FIXED ✅
+- Cursor not remaining in link state when hovering over a link ⛔️
 
 ## UI Mockups
 
