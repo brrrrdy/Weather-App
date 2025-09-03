@@ -1,16 +1,20 @@
 /* * {
   border: 1px solid rgba(221, 38, 38, 0.74);
 } */
+
 @import url("https://fonts.googleapis.com/css2?family=Micro+5+Charted&display=swap");
+
+/* main */
 
 :root {
   --primary: #339989;
   --secondary: #7de2d1;
   --accent: #efa148;
+  --header: #cd5c5c;
   --light: #fffafb;
+  --searchlight: #bfe3f1;
   --dark: #131515;
   --gray: #2b2c28;
-  --white: #ffffff;
   --font-logo: "Micro 5 Charted", sans-serif;
 }
 
@@ -18,7 +22,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: var(--primary);
   min-height: 100vh;
   position: relative;
 }
@@ -27,7 +30,7 @@ body > * {
   position: relative;
 }
 
-/* Day background */
+/* day background */
 
 body::before {
   content: "";
@@ -46,7 +49,8 @@ body::before {
   z-index: -1;
 }
 
-/* Night background */
+/* night background */
+
 body::after {
   content: "";
   position: absolute;
@@ -64,7 +68,7 @@ body::after {
   z-index: -1;
 }
 
-/* When night class is added, fade out day and fade in night */
+/* when night class is added, fade out day and fade in night */
 
 body.night-background::before {
   opacity: 0;
@@ -74,7 +78,7 @@ body.night-background::after {
   opacity: 1;
 }
 
-/* Update text colors for night background */
+/* update text colors for night background */
 
 body.night-background .search-input,
 body.night-background .city,
@@ -90,8 +94,21 @@ body.night-background .app-logo {
   color: var(--accent) !important;
 }
 
+body.night-background .app-logo:hover {
+  color: var(--secondary) !important;
+}
+
 body.night-background .search-input {
-  background-color: transparent;
+  background: color-mix(in srgb, var(--searchlight) 15%, transparent);
+  border: transparent;
+}
+
+body.night-background .about-link {
+  color: var(--accent);
+}
+
+body.night-background .about-link:hover {
+  color: var(--secondary);
 }
 
 body.night-background .metric .label {
@@ -102,17 +119,22 @@ body.night-background .search-input::placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* page container */
+
 .page-container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
+/* header */
+
 .app-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
+  gap: 20px;
 }
 
 .app-logo {
@@ -121,27 +143,53 @@ body.night-background .search-input::placeholder {
   font-weight: 400;
   letter-spacing: 1px;
   font-style: italic;
-  color: indianred;
+  color: var(--header);
+  margin: 0;
 }
 
-/* search styles */
+/* search */
+
 .search-container {
   display: flex;
   align-items: center;
   position: relative;
+  justify-content: center;
+  flex: 1;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .search-input {
-  background: transparent;
-  border: none;
+  background: color-mix(in srgb, var(--searchlight) 15%, transparent);
+  border: transparent;
+  border-radius: 25px;
   outline: none;
   color: var(--dark);
   font-size: 16px;
-  width: 200px;
+  width: 100%;
+  max-width: 280px;
   transition: all 1.5s ease-in-out;
+  padding: 15px 15px;
 }
 
-/* results styles */
+/* about link */
+
+.about-link {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 15px;
+  transition: all 0.3s ease-in-out;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.about-link:hover {
+  color: var(--header);
+}
+
+/* results  */
+
 .results {
   display: flex;
   justify-content: center;
@@ -221,7 +269,8 @@ body.night-background .search-input::placeholder {
   transition: color 1.5s ease-in-out;
 }
 
-/* unit switcher styles */
+/* unit switcher  */
+
 .unit-switcher {
   display: flex;
   justify-content: center;
@@ -252,6 +301,7 @@ body.night-background .unit-switcher button.active {
 }
 
 /* loading and error states */
+
 .loading {
   color: var(--dark);
   text-align: center;
@@ -282,3 +332,13 @@ body.night-background .error p {
 body.night-background .muted {
   color: var(--secondary);
 }
+
+/* mobile responsiveness */
+
+/* 360px */
+
+/* 390px */
+
+/* 768px */
+
+/* 810px */

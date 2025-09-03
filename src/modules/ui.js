@@ -3,14 +3,18 @@ export function createInitialUI() {
   pageContainer.className = "page-container";
 
   // header
+
   const header = document.createElement("header");
   header.className = "app-header";
 
+  // logo
+
   const logo = document.createElement("div");
   logo.className = "app-logo";
-  logo.textContent = "the weather";
+  logo.textContent = "The Weather";
 
   // search container
+
   const searchContainer = document.createElement("div");
   searchContainer.className = "search-container";
 
@@ -20,10 +24,22 @@ export function createInitialUI() {
   searchInput.placeholder = "Search for a city...";
 
   searchContainer.appendChild(searchInput);
+
+  // right nav
+
+  const aboutLink = document.createElement("a");
+  aboutLink.className = "about-link";
+  aboutLink.href = "#";
+  aboutLink.textContent = "about";
+
+  // add logo and search to header
+
   header.appendChild(logo);
   header.appendChild(searchContainer);
+  header.appendChild(aboutLink);
 
-  // main content
+  // results container
+
   const main = document.createElement("main");
   main.className = "app-main";
 
@@ -44,6 +60,7 @@ export function createInitialUI() {
     searchInput,
     results,
     main,
+    aboutLink,
   };
 }
 
