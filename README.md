@@ -25,7 +25,7 @@ Uses everything learned so far to create a weather forecast site using the [Visu
 ### Bugs
 
 - API not loading chance of rain correctly. FIXED ✅
-- Cursor not remaining in link state when hovering over a link ⛔️
+- Cursor not remaining in link state when hovering over a link FIXED ✅
 
 ## UI Mockups
 
