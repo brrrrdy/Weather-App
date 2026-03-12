@@ -36,7 +36,6 @@ export function createInitialUI() {
   const aboutLink = document.createElement("a");
   aboutLink.className = "about-link";
   aboutLink.href = "https://github.com/brrrrdy/Weather-App";
-  aboutLink.textContent = "about";
   aboutLink.target = "_blank";
   aboutLink.rel = "noopener";
 
